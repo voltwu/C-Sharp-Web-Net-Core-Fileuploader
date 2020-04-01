@@ -1,4 +1,4 @@
-/*
+﻿/*
  * jQuery File Upload Demo
  * https://github.com/blueimp/jQuery-File-Upload
  *
@@ -28,56 +28,84 @@ $(function () {
         // Uncomment the following to send cross-domain cookies:
         //xhrFields: {withCredentials: true},
         //url: 'server/php'
-        url: 'fileupload/UploadFiles'
+        url: main.getServerAddress()
     });
+
     // Enable iframe cross-domain access via redirect option:
     $('#fileupload').fileupload(
         'option',
         'redirect',
         window.location.href.replace(/\/[^/]*$/, '/cors/result.html?%s')
     );
-    if (window.location.hostname === 'blueimp.github.io') {
-        // Demo settings:
-        $('#fileupload').fileupload('option', {
-            url: '//jquery-file-upload.appspot.com/',
-            // Enable image resizing, except for Android and Opera,
-            // which actually support image resizing, but fail to
-            // send Blob objects via XHR requests:
-            disableImageResize: /Android(?!.*Chrome)|Opera/.test(
-                window.navigator.userAgent
-            ),
-            maxFileSize: 999000,
-            acceptFileTypes: /(\.|\/)(gif|jpe?g|png)$/i
-        });
-        // Upload server status check for browsers with CORS support:
-        if ($.support.cors) {
-            $.ajax({
-                url: '//jquery-file-upload.appspot.com/',
-                type: 'HEAD'
-            }).fail(function () {
-                $('<div class="alert alert-danger"/>')
-                    .text('Upload server currently unavailable - ' + new Date())
-                    .appendTo('#fileupload');
-            });
-        }
-    } else {
-        // Load existing files:
-        $('#fileupload').addClass('fileupload-processing');
-        $.ajax({
-            // Uncomment the following to send cross-domain cookies:
-            //xhrFields: {withCredentials: true},
-            url: $('#fileupload').fileupload('option', 'url'),
-            dataType: 'json',
-            context: $('#fileupload')[0]
-        })
-            .always(function () {
-                $(this).removeClass('fileupload-processing');
-            })
-            .done(function (result) {
-                $(this)
-                    .fileupload('option', 'done')
-                    // eslint-disable-next-line new-cap
-                    .call(this, $.Event('done'), { result: result });
-            });
-    }
+    var maxFileCount = 3; // the maximum file account allowed
+    $('#fileupload').fileupload('option', {
+        // Enable image resizing, except for Android and Opera,
+        // which actually support image resizing, but fail to
+        // send Blob objects via XHR requests:
+        disableImageResize: /Android(?!.*Chrome)|Opera/.test(
+            window.navigator.userAgent
+        ),
+        maxNumberOfFiles: maxFileCount,
+        change: function (e, data) {
+            var len = 0;
+            try
+            { len = data.form[0].children[1].children[0].children.length}
+            catch
+            { len = 0 }
+            console.log(len);
+            console.log(maxFileCount);
+
+            if (len >= maxFileCount) {
+                alert("Max " + maxFileCount + " files are allowed")
+                return false;
+            }
+        },
+        maxFileSize: 5000000,//max file size 5M
+        acceptFileTypes: /(\.|\/)(gif|jpe?g|png|bmp)$/i
+    });
+
+    //if (window.location.hostname === 'blueimp.github.io') {
+    //    // Demo settings:
+    //    $('#fileupload').fileupload('option', {
+    //        url: '//jquery-file-upload.appspot.com/',
+    //        // Enable image resizing, except for Android and Opera,
+    //        // which actually support image resizing, but fail to
+    //        // send Blob objects via XHR requests:
+    //        disableImageResize: /Android(?!.*Chrome)|Opera/.test(
+    //            window.navigator.userAgent
+    //        ),
+    //        maxFileSize: 999000,
+    //        acceptFileTypes: /(\.|\/)(gif|jpe?g|png)$/i
+    //    });
+    //    // Upload server status check for browsers with CORS support:
+    //    if ($.support.cors) {
+    //        $.ajax({
+    //            url: '//jquery-file-upload.appspot.com/',
+    //            type: 'HEAD'
+    //        }).fail(function () {
+    //            $('<div class="alert alert-danger"/>')
+    //                .text('Upload server currently unavailable - ' + new Date())
+    //                .appendTo('#fileupload');
+    //        });
+    //    }
+    //} else {
+    // Load existing files:
+    $('#fileupload').addClass('fileupload-processing');
+    $.ajax({
+        // Uncomment the following to send cross-domain cookies:
+        //xhrFields: {withCredentials: true},
+        url: $('#fileupload').fileupload('option', 'url'),
+        dataType: 'json',
+        context: $('#fileupload')[0]
+    })
+    .always(function () {
+        $(this).removeClass('fileupload-processing');
+    })
+    .done(function (result) {
+        $(this)
+            .fileupload('option', 'done')
+            // eslint-disable-next-line new-cap
+            .call(this, $.Event('done'), { result: result });
+    });
+    //}
 });

@@ -11,6 +11,12 @@
     <div class="container">
         <main role="main" class="pb-3">
             @RenderBody()
+            <hr/>
+            <ul>
+                <li>The maximum file size for uploads in this demo is 5 M</li>
+                <li>Only image files (gif,jpg,png,bmp) are allowed in this demo</li>
+                <li>The maximum number of files that are allowed to be uploaded is 3</li>
+            </ul>
         </main>
     </div>
     @RenderSection("Scripts", required: false)

@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\job\\4.biolabs_rAb\\Taskdocument\\4-code\\ImageUploader\\ImageUploader.csproj": {}
+    "D:\\other\\day20200400\\C-Sharp-Web-Net-Core-Fileuploader\\ImageUploader.csproj": {}
   },
   "projects": {
-    "D:\\job\\4.biolabs_rAb\\Taskdocument\\4-code\\ImageUploader\\ImageUploader.csproj": {
+    "D:\\other\\day20200400\\C-Sharp-Web-Net-Core-Fileuploader\\ImageUploader.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\job\\4.biolabs_rAb\\Taskdocument\\4-code\\ImageUploader\\ImageUploader.csproj",
+        "projectUniqueName": "D:\\other\\day20200400\\C-Sharp-Web-Net-Core-Fileuploader\\ImageUploader.csproj",
         "projectName": "ImageUploader",
-        "projectPath": "D:\\job\\4.biolabs_rAb\\Taskdocument\\4-code\\ImageUploader\\ImageUploader.csproj",
+        "projectPath": "D:\\other\\day20200400\\C-Sharp-Web-Net-Core-Fileuploader\\ImageUploader.csproj",
         "packagesPath": "C:\\Users\\wxg\\.nuget\\packages\\",
-        "outputPath": "D:\\job\\4.biolabs_rAb\\Taskdocument\\4-code\\ImageUploader\\obj\\",
+        "outputPath": "D:\\other\\day20200400\\C-Sharp-Web-Net-Core-Fileuploader\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\wxg\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -38,6 +38,10 @@
       "frameworks": {
         "netcoreapp3.0": {
           "dependencies": {
+            "CD.Net.Core.Mvc": {
+              "target": "Package",
+              "version": "[3.0.0, )"
+            },
             "Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation": {
               "target": "Package",
               "version": "[3.0.3, )"
