@@ -4,6 +4,15 @@
 # Enviroment
 .net Core Version : .net Core 3.0
 
+如果部署到Linux上，还需要从Docker上执行以下命令, [详情][1]
+```
+FROM microsoft/dotnet:2.1-aspnetcore-runtime AS base
+RUN ln -s /lib/x86_64-linux-gnu/libdl.so.2 /lib/x86_64-linux-gnu/libdl.so
+RUN apt update
+RUN apt install -y libgdiplus
+RUN ln -s /usr/lib/libgdiplus.so /lib/x86_64-linux-gnu/libgdiplus.so
+```
+
 # Key策略机制简述
 1. 用户请求服务器，服务器启动token自动更新机制（默认是每隔10分钟生成一个新的token），并且返回给用户最新的token值。
 2. 客户端拿着最新的token请求服务器，服务器验证token的有效性：
@@ -27,3 +36,5 @@
 ![b.png](screenshots/b.png)
 
 ![c.png](screenshots/c.png)
+
+[1]:https://github.com/JanKallman/EPPlus/issues/83
