@@ -105,9 +105,9 @@ namespace jQuery_File_Upload.MVC3.Controllers
 
             if (System.IO.File.Exists(filePath))
             {
+                context.Response.Clear();            
                 context.Response.Headers.Add("Content-Disposition", "attachment; filename=\"" + filename + "\"");
                 context.Response.ContentType = "application/octet-stream";
-                context.Response.Clear();
                 using (System.IO.FileStream fsm = new FileStream(filePath, FileMode.Open))
                 {
                     byte[] bytes = new byte[1024];
