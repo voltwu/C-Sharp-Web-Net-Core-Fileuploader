@@ -158,17 +158,10 @@ namespace jQuery_File_Upload.MVC3.Controllers
         }
         private Image generateThumbnailImage(int width, int height, String resourcePath)
         {
-            try
-            {
                 using var resource = System.IO.File.OpenRead(resourcePath);
                 Image image = Image.FromStream(resource);
                 Image thumb = image.GetThumbnailImage(width, height, () => false, IntPtr.Zero);
                 return thumb;
-            }
-            catch (Exception e)
-            {
-                return null;
-            }
         }
     }
     public class ViewDataUploadFilesResult
